@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add('js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ONG Maré Solidária - ações comunitárias em Recife e Região Metropolitana">
   <title>Maré Solidária | Início</title>
@@ -9,20 +10,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variaveis.css">
+  <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/componentes.css">
 </head>
 <body>
 
   <header class="topo">
-    <div class="container topo-conteudo">
-      <a href="index.html" class="marca">
+    <div class="container grid topo-conteudo">
+      <a href="index.html" class="marca col-8 col-md-4">
         <img src="img/logo.png" alt="" width="44" height="44">
         <span>Maré Solidária</span>
       </a>
-      <nav aria-label="Menu principal">
-        <ul class="menu">
+      <nav class="navegacao col-4 col-md-8" aria-label="Menu principal">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+          <span class="menu-toggle__barra"></span>
+          <span class="menu-toggle__barra"></span>
+          <span class="menu-toggle__barra"></span>
+        </button>
+        <ul class="menu" id="menu-principal">
           <li><a href="index.html" aria-current="page">Início</a></li>
-          <li><a href="projetos.html">Projetos</a></li>
+          <li class="tem-submenu">
+            <a href="projetos.html">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#reforco">Reforço na Maré</a></li>
+              <li><a href="projetos.html#cozinha">Cozinha da Comunidade</a></li>
+              <li><a href="projetos.html#canal">Canal Limpo</a></li>
+              <li><a href="projetos.html#doacoes">Como doar</a></li>
+            </ul>
+          </li>
           <li><a href="cadastro.html">Seja voluntário</a></li>
         </ul>
       </nav>
@@ -39,34 +56,38 @@
     </section>
 
     <section class="container sobre" id="sobre">
-      <h2>Quem somos</h2>
-      <p>A ONG começou com um grupo de vizinhos do Ibura que se juntou para dar aula de reforço para as crianças da rua durante as férias. A ideia cresceu, outras pessoas foram chegando e hoje temos três frentes de trabalho fixas.</p>
-      <p>Não recebemos dinheiro de partido político. Nosso custo é coberto por doações de pessoas físicas, parcerias com comércios locais e um edital municipal por ano.</p>
+      <div class="grid">
+        <div class="col-12 col-lg-6">
+          <h2>Quem somos</h2>
+          <p>A ONG começou com um grupo de vizinhos do Ibura que se juntou para dar aula de reforço para as crianças da rua durante as férias. A ideia cresceu, outras pessoas foram chegando e hoje temos três frentes de trabalho fixas.</p>
+          <p>Não recebemos dinheiro de partido político. Nosso custo é coberto por doações de pessoas físicas, parcerias com comércios locais e um edital municipal por ano.</p>
+        </div>
 
-      <figure class="foto-sobre">
-        <img src="img/voluntarios.png" alt="Ilustração de quatro voluntários de mãos dadas, um adulto e três jovens, em frente ao mar com o sol ao fundo." width="800" height="450" loading="lazy">
-        <figcaption>Voluntários da Maré Solidária reunidos no mutirão Canal Limpo.</figcaption>
-      </figure>
+        <figure class="foto-sobre col-12 col-lg-6">
+          <img src="img/voluntarios.png" alt="Ilustração de quatro voluntários de mãos dadas, um adulto e três jovens, em frente ao mar com o sol ao fundo." width="800" height="450" loading="lazy">
+          <figcaption>Voluntários da Maré Solidária reunidos no mutirão Canal Limpo.</figcaption>
+        </figure>
+      </div>
 
-      <div class="numeros">
-        <p><strong>320</strong> crianças atendidas no reforço em 2025</p>
-        <p><strong>1.400</strong> refeições servidas por mês</p>
-        <p><strong>85</strong> voluntários ativos</p>
+      <div class="grid numeros">
+        <p class="col-12 col-sm-4"><strong>320</strong> crianças atendidas no reforço em 2025</p>
+        <p class="col-12 col-sm-4"><strong>1.400</strong> refeições servidas por mês</p>
+        <p class="col-12 col-sm-4"><strong>85</strong> voluntários ativos</p>
       </div>
     </section>
 
     <section class="container como-ajudar">
       <h2>Como você pode ajudar</h2>
-      <div class="colunas">
-        <article>
+      <div class="grid">
+        <article class="col-12 col-md-6 col-lg-4">
           <h3>Doando seu tempo</h3>
           <p>Uma manhã por semana já faz diferença. Você escolhe a área e o horário no cadastro.</p>
         </article>
-        <article>
+        <article class="col-12 col-md-6 col-lg-4">
           <h3>Doando alimentos</h3>
           <p>Recebemos alimentos não perecíveis na sede de segunda a sexta, das 8h às 17h.</p>
         </article>
-        <article>
+        <article class="col-12 col-md-6 col-lg-4">
           <h3>Divulgando</h3>
           <p>Compartilhe nossos projetos com amigos, na igreja, no trabalho ou no grupo da família.</p>
         </article>
@@ -75,16 +96,17 @@
   </main>
 
   <footer class="rodape">
-    <div class="container rodape-conteudo">
-      <address>
+    <div class="container grid rodape-conteudo">
+      <address class="col-12 col-md-8">
         <strong>Maré Solidária</strong><br>
         Rua Exemplo, 123 - Ibura, Recife - PE<br>
         <a href="mailto:contato@maresolidaria.org">contato@maresolidaria.org</a><br>
         <a href="tel:+5581999990000">(81) 99999-0000</a>
       </address>
-      <p><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
+      <p class="col-12 col-md-4"><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
     </div>
   </footer>
 
+  <script src="js/menu.js"></script>
 </body>
 </html>

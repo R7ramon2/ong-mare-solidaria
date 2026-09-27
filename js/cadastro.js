@@ -9,6 +9,9 @@ const mensagem = document.getElementById('mensagem');
 const contador = document.getElementById('contador');
 const cepStatus = document.getElementById('cep-status');
 const sucesso = document.getElementById('mensagem-sucesso');
+const sucessoTexto = document.getElementById('mensagem-sucesso-texto');
+const alertaErros = document.getElementById('alerta-erros');
+const alertaErrosTexto = document.getElementById('alerta-erros-texto');
 
 
 // ---------- mascaras ----------
@@ -146,20 +149,77 @@ async function buscarCEP(numeroCep) {
 
 // ---------- envio ----------
 
+// ---------- alerta de erros ----------
+// antes do envio, conta os campos com problema e mostra um resumo
+const botaoEnviar = form.querySelector('button[type="submit"]');
+
+botaoEnviar.addEventListener('click', function () {
+  const nomesComErro = new Set();
+
+  Array.from(form.elements).forEach(function (campo) {
+    if (campo.willValidate && !campo.validity.valid) {
+      nomesComErro.add(campo.name); // radios do mesmo grupo contam uma vez so
+    }
+  });
+
+  if (nomesComErro.size > 0) {
+    const plural = nomesComErro.size > 1;
+    alertaErrosTexto.textContent = 'Encontramos ' + nomesComErro.size +
+      (plural ? ' campos que precisam' : ' campo que precisa') +
+      ' de atenção. Eles estão destacados em vermelho.';
+    alertaErros.hidden = false;
+    sucesso.hidden = true;
+  } else {
+    alertaErros.hidden = true;
+  }
+});
+
+
+// ---------- envio ----------
 // o evento submit so dispara se todas as validacoes nativas passarem
 form.addEventListener('submit', function (evento) {
   evento.preventDefault();
 
-  const primeiroNome = document.getElementById('nome').value.trim().split(' ')[0];
-  sucesso.textContent = 'Obrigado, ' + primeiroNome + '! Recebemos seu cadastro e vamos entrar em contato em breve.';
-  sucesso.hidden = false;
+  // desativa o botao durante o "envio" para evitar clique duplo
+  botaoEnviar.disabled = true;
+  botaoEnviar.textContent = 'Enviando...';
 
-  form.reset();
-  contador.textContent = '0';
-  sucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // simula o tempo de resposta de um servidor
+  setTimeout(function () {
+    const primeiroNome = document.getElementById('nome').value.trim().split(' ')[0];
+    sucessoTexto.textContent = 'Obrigado, ' + primeiroNome + '! Vamos entrar em contato em até uma semana.';
+    sucesso.hidden = false;
+    alertaErros.hidden = true;
+
+    form.reset();
+    contador.textContent = '0';
+    botaoEnviar.disabled = false;
+    botaoEnviar.textContent = 'Enviar cadastro';
+    sucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    mostrarToast('Cadastro enviado com sucesso!');
+  }, 1200);
 });
 
 form.addEventListener('reset', function () {
   cepStatus.textContent = '';
   contador.textContent = '0';
+});
+
+
+// ---------- modal de confirmacao do "Limpar" ----------
+const modalLimpar = document.getElementById('modal-limpar');
+
+document.getElementById('botao-limpar').addEventListener('click', function () {
+  modalLimpar.showModal();
+});
+
+// o <form method="dialog"> fecha o modal e guarda o value do botao clicado
+modalLimpar.addEventListener('close', function () {
+  if (modalLimpar.returnValue === 'confirmar') {
+    form.reset();
+    alertaErros.hidden = true;
+    sucesso.hidden = true;
+    mostrarToast('Formulário limpo.');
+  }
+  modalLimpar.returnValue = '';
 });

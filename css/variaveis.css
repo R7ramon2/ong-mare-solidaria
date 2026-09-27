@@ -1,0 +1,86 @@
+/* =========================================================
+   Design System - Maré Solidária
+   Todas as cores, tamanhos de fonte e espaçamentos do site
+   saem daqui. Para mudar o visual, mexer só neste arquivo.
+   ========================================================= */
+
+:root {
+
+  /* ---------- Cores ---------- */
+
+  /* primárias: verde mangue (identidade da ONG) */
+  --cor-primaria-900: #1f4037;  /* títulos, rodapé */
+  --cor-primaria-700: #2f5d50;  /* cabeçalho, links, bordas de destaque */
+  --cor-primaria-300: #bcd8cc;  /* detalhes, ilustrações */
+  --cor-primaria-100: #e6efe9;  /* fundos suaves */
+
+  /* secundárias: amarelo sol (chamadas para ação) */
+  --cor-secundaria-500: #f2b632; /* botões, destaques */
+  --cor-secundaria-600: #e0a41f; /* hover dos botões */
+  --cor-secundaria-700: #d4991a; /* botão pressionado (active) */
+
+  /* neutras */
+  --cor-neutra-900: #243330;    /* texto principal */
+  --cor-neutra-600: #5d6b67;    /* texto de apoio */
+  --cor-neutra-300: #c9d5cf;    /* bordas de campos e divisórias */
+  --cor-neutra-000: #ffffff;    /* fundo */
+  --cor-sombra: rgba(31, 64, 55, 0.12);
+
+  /* feedback */
+  --cor-erro: #b3261e;
+  --cor-erro-fundo: #fdf3f2;
+  --cor-sucesso: #2f5d50;
+  --cor-sucesso-fundo: #e6efe9;
+  --cor-aviso: #6b4d00;
+  --cor-aviso-fundo: #fdf3dc;
+  --cor-info: #5d6b67;
+  --cor-info-fundo: #f1f4f3;
+
+
+  /* ---------- Tipografia ---------- */
+
+  --fonte-titulo: 'Bitter', Georgia, serif;
+  --fonte-texto: 'Nunito', Arial, sans-serif;
+
+  /* escala 1.25 (terça maior) a partir de 16px */
+  --texto-pequeno: 0.8rem;     /* 12.8px - legendas, dicas */
+  --texto-base: 1rem;          /* 16px   - corpo do texto */
+  --texto-h3: 1.25rem;         /* 20px   - subtítulos */
+  --texto-h2: 1.563rem;        /* 25px   - títulos de seção */
+  --texto-h1: 1.953rem;        /* 31px   - título da página */
+  --texto-destaque: 2.441rem;  /* 39px   - frase do banner */
+
+  --peso-normal: 400;
+  --peso-medio: 600;
+  --peso-forte: 700;
+
+  --altura-linha-texto: 1.6;
+  --altura-linha-titulo: 1.25;
+
+
+  /* ---------- Espaçamentos ---------- */
+
+  /* escala de base 4px (todos múltiplos de 4) */
+  --espaco-1: 0.25rem;  /* 4px  */
+  --espaco-2: 0.5rem;   /* 8px  */
+  --espaco-3: 1rem;     /* 16px */
+  --espaco-4: 1.5rem;   /* 24px */
+  --espaco-5: 2rem;     /* 32px */
+  --espaco-6: 3rem;     /* 48px */
+  --espaco-7: 4rem;     /* 64px */
+
+
+  /* ---------- Interação ---------- */
+
+  --transicao: 0.2s ease;
+  --foco: 3px solid var(--cor-primaria-900);        /* foco em fundo claro */
+  --foco-escuro: 3px solid var(--cor-secundaria-500); /* foco em fundo escuro */
+  --sombra-elevada: 0 6px 16px var(--cor-sombra);
+
+
+  /* ---------- Outros ---------- */
+
+  --raio-pequeno: 4px;
+  --raio-medio: 8px;
+  --largura-texto: 65ch;
+}
