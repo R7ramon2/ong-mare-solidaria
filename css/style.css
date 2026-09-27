@@ -1,15 +1,10 @@
 /* =========================================================
    Estilos do site - Maré Solidária
-   Ordem de carregamento: variaveis.css > grid.css > style.css
+   Ordem de carregamento: reset.css > variaveis.css > grid.css >
+   style.css > componentes.css
    Os estilos base valem para o celular (mobile-first) e as
    media queries no fim do arquivo ajustam para telas maiores.
    ========================================================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 body {
   font-family: var(--fonte-texto);
@@ -770,4 +765,20 @@ input[type="tel"]:user-invalid {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
+}
+
+
+/* ===== SPA: transicao ao trocar de pagina ===== */
+main {
+  transition: opacity var(--transicao);
+}
+
+main.carregando {
+  opacity: 0.4;
+}
+
+/* o titulo (ou a ancora) recebe foco via JS depois da navegacao,
+   so para o leitor de tela; nao precisa de contorno */
+main [tabindex="-1"]:focus {
+  outline: none;
 }
