@@ -37,6 +37,40 @@
   --cor-info-fundo: #f1f4f3;
 
 
+  /* ---------- Cores por função (tokens semânticos) ----------
+     O CSS das páginas usa só estes nomes, que dizem PARA QUE a cor
+     serve (fundo, texto, ação...), e não QUAL é a cor. Assim, o modo
+     escuro e o alto contraste (temas.css) só precisam redefinir esta
+     lista, sem mexer no resto do CSS. */
+
+  --cor-fundo: var(--cor-neutra-000);             /* fundo da página, campos e cards */
+  --cor-fundo-suave: var(--cor-primaria-100);     /* banner, hover, destaques */
+  --cor-fundo-ativo: var(--cor-primaria-300);     /* item pressionado */
+  --cor-texto: var(--cor-neutra-900);
+  --cor-texto-apoio: var(--cor-neutra-600);
+  --cor-titulo: var(--cor-primaria-900);
+  --cor-link: var(--cor-primaria-700);
+  --cor-borda: var(--cor-neutra-300);
+  --cor-borda-forte: var(--cor-neutra-600);
+  --cor-borda-destaque: var(--cor-primaria-300);
+
+  --cor-marca: var(--cor-primaria-700);           /* cabeçalho e chamadas */
+  --cor-marca-escura: var(--cor-primaria-900);    /* rodapé, painel do menu, toast */
+  --cor-sobre-marca: var(--cor-neutra-000);       /* texto em cima da marca */
+  --cor-sobre-marca-suave: var(--cor-primaria-100);
+  --cor-borda-sobre-marca: var(--cor-primaria-300);
+
+  --cor-acao: var(--cor-secundaria-500);          /* botões principais */
+  --cor-acao-hover: var(--cor-secundaria-600);
+  --cor-acao-ativa: var(--cor-secundaria-700);
+  --cor-sobre-acao: var(--cor-primaria-900);      /* texto em cima do botão */
+  --cor-destaque: var(--cor-secundaria-500);      /* sublinhados e bordas decorativas */
+
+  --cor-foco: var(--cor-primaria-900);
+  --cor-foco-sobre-marca: var(--cor-secundaria-500);
+  --cor-backdrop: rgba(31, 64, 55, 0.6);          /* fundo atrás do modal */
+
+
   /* ---------- Tipografia ---------- */
 
   --fonte-titulo: 'Bitter', Georgia, serif;
@@ -73,8 +107,8 @@
   /* ---------- Interação ---------- */
 
   --transicao: 0.2s ease;
-  --foco: 3px solid var(--cor-primaria-900);        /* foco em fundo claro */
-  --foco-escuro: 3px solid var(--cor-secundaria-500); /* foco em fundo escuro */
+  --foco: 3px solid var(--cor-foco);
+  --foco-escuro: 3px solid var(--cor-foco-sobre-marca);
   --sombra-elevada: 0 6px 16px var(--cor-sombra);
 
 

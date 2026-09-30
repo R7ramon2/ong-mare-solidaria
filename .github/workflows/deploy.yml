@@ -1,0 +1,64 @@
+# Build, testes e deploy no GitHub Pages
+#
+# - Em todo Pull Request para develop ou main: roda os testes e o build.
+#   Se algo quebrar, o PR mostra o erro antes do merge.
+# - Em todo push na main (merge de uma release): roda tudo de novo e
+#   publica a pasta dist/ no GitHub Pages.
+
+name: Build e deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+
+      - name: Instalar o Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar os testes
+        run: npm test
+
+      - name: Gerar a versão de produção
+        run: npm run build
+
+      - name: Enviar a dist/ para o Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: publicar
+        uses: actions/deploy-pages@v5

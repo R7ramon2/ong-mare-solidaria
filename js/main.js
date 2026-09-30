@@ -6,6 +6,8 @@ import { iniciarMenu } from './modules/menu.js';
 import { iniciarFormulario } from './modules/formulario.js';
 import { iniciarDoacoes } from './modules/doacoes.js';
 import { iniciarRoteador } from './modules/roteador.js';
+import { iniciarPreferencias } from './modules/preferencias.js';
+import { iniciarGrafico } from './modules/grafico.js';
 
 // avisa o CSS que o JavaScript carregou; so entao o menu do celular
 // vira hamburguer. Se o JS falhar, os links continuam visiveis.
@@ -16,8 +18,10 @@ document.documentElement.classList.add('js');
 function iniciarPagina() {
   iniciarFormulario();
   iniciarDoacoes();
+  iniciarGrafico();
 }
 
+iniciarPreferencias();
 iniciarMenu();
 iniciarPagina();
 iniciarRoteador(iniciarPagina);

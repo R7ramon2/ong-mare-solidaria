@@ -23,7 +23,12 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--espaco-4);
+  /* sao 11 espacos entre as 12 colunas. Com gap fixo em rem, numa tela
+     de 320px com o texto ampliado, os espacos sozinhos passavam da
+     largura da tela (WCAG 1.4.10). O clamp faz o espaco entre colunas
+     acompanhar a largura da tela, com o maximo de 24px. */
+  column-gap: clamp(var(--espaco-1), 2vw, var(--espaco-4));
+  row-gap: var(--espaco-4);
 }
 
 /* sem classe de coluna, o item ocupa a linha inteira */

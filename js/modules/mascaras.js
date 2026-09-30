@@ -9,7 +9,16 @@ export function mascaraCPF(valor) {
 }
 
 export function mascaraTelefone(valor) {
-  valor = valor.replace(/\D/g, '').slice(0, 11);
+  valor = valor.replace(/\D/g, '');
+
+  // número colado com código do país (+55) ou com 0 da operadora
+  // (081...): tira o prefixo antes de aplicar a máscara
+  if (valor.length > 11 && valor.startsWith('55')) {
+    valor = valor.slice(2);
+  } else if (valor.length > 10 && valor.startsWith('0')) {
+    valor = valor.slice(1);
+  }
+  valor = valor.slice(0, 11);
 
   if (valor.length > 10) {
     // celular: (81) 99999-9999

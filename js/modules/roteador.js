@@ -5,8 +5,17 @@
 // Como cada URL é um arquivo .html de verdade, recarregar a página ou
 // abrir o link direto continua funcionando (sem erro 404).
 
+import { mostrarToast } from './toast.js';
+
 const paginasEmCache = new Map();
 let aoRenderizar = function () {};
+
+// conta as navegações; só a mais recente pode renderizar
+// (evita que uma página lenta sobrescreva a que foi clicada depois)
+let ultimaNavegacao = 0;
+
+// caminho da página que está na tela agora
+let caminhoAtual = location.pathname;
 
 export function iniciarRoteador(callback) {
   aoRenderizar = callback;
@@ -18,6 +27,9 @@ export function iniciarRoteador(callback) {
 
   // botões voltar/avançar do navegador
   window.addEventListener('popstate', function () {
+    // se só a âncora mudou (#doacoes -> topo), o navegador já rola a
+    // tela sozinho; não precisa buscar e redesenhar a mesma página
+    if (location.pathname === caminhoAtual) return;
     navegar(location.href, false);
   });
 }
@@ -61,6 +73,7 @@ async function buscarPagina(caminho) {
 async function navegar(url, adicionarAoHistorico) {
   const destino = new URL(url, location.href);
   const principal = document.querySelector('main');
+  const estaNavegacao = ++ultimaNavegacao;
 
   principal.setAttribute('aria-busy', 'true');
   principal.classList.add('carregando');
@@ -68,11 +81,15 @@ async function navegar(url, adicionarAoHistorico) {
   try {
     const html = await buscarPagina(destino.pathname);
 
+    // enquanto esta página carregava, a pessoa clicou em outro link
+    if (estaNavegacao !== ultimaNavegacao) return;
+
     // transforma o texto em um documento para poder usar querySelector nele
     const pagina = new DOMParser().parseFromString(html, 'text/html');
     const novoConteudo = pagina.querySelector('main');
 
     renderizar(principal, novoConteudo);
+    caminhoAtual = destino.pathname;
     document.title = pagina.title;
     atualizarMenu(destino.pathname);
 
@@ -83,11 +100,25 @@ async function navegar(url, adicionarAoHistorico) {
     posicionarTela(destino.hash);
     aoRenderizar();
   } catch (erro) {
-    // se algo falhar, faz a navegação normal (recarregando a página)
-    location.href = destino.href;
+    if (estaNavegacao !== ultimaNavegacao) return;
+
+    // sem internet o fetch lança TypeError. Recarregar levaria para a
+    // tela de erro do navegador, então a pessoa fica onde está e é avisada
+    if (!navigator.onLine || erro instanceof TypeError) {
+      mostrarToast('Sem conexão com a internet. Verifique e tente de novo.', 'erro');
+      if (!adicionarAoHistorico) {
+        // no "voltar" a URL já mudou; devolve a URL da página na tela
+        history.pushState({ spa: true }, '', caminhoAtual);
+      }
+    } else {
+      // outro erro (ex: página não encontrada): navegação normal
+      location.href = destino.href;
+    }
   } finally {
-    principal.removeAttribute('aria-busy');
-    principal.classList.remove('carregando');
+    if (estaNavegacao === ultimaNavegacao) {
+      principal.removeAttribute('aria-busy');
+      principal.classList.remove('carregando');
+    }
   }
 }
 

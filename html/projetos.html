@@ -5,17 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Projetos sociais da ONG Maré Solidária">
   <title>Maré Solidária | Projetos</title>
+  <!-- aplica o tema e o tamanho de texto salvos antes de desenhar a página,
+       para não piscar o tema claro em quem escolheu o escuro -->
+  <script>
+    try {
+      var pref = JSON.parse(localStorage.getItem('mare:preferencias'));
+      if (pref && pref.tema && pref.tema !== 'auto') document.documentElement.dataset.tema = pref.tema;
+      if (pref && pref.escalaFonte) document.documentElement.style.fontSize = pref.escalaFonte + '%';
+    } catch (e) {}
+  </script>
   <link rel="icon" href="../imagens/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/variaveis.css">
   <link rel="stylesheet" href="../css/grid.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/temas.css">
 </head>
 <body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
 
   <header class="topo">
     <div class="container grid topo-conteudo">
@@ -46,7 +58,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="conteudo" tabindex="-1">
     <h1>Nossos projetos</h1>
     <p class="intro">Você pode ajudar a Maré Solidária de duas formas: doando seu tempo como voluntário ou contribuindo com doações. Escolha abaixo o que combina mais com você.</p>
 
@@ -172,13 +184,28 @@
 
   <footer class="rodape">
     <div class="container grid rodape-conteudo">
-      <address class="col-12 col-md-8">
+      <address class="col-12 col-md-6">
         <strong>Maré Solidária</strong><br>
         Rua Exemplo, 123 - Ibura, Recife - PE<br>
         <a href="mailto:contato@maresolidaria.org">contato@maresolidaria.org</a><br>
         <a href="tel:+5581999990000">(81) 99999-0000</a>
       </address>
-      <p class="col-12 col-md-4"><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
+      <div class="preferencias col-12 col-md-6">
+        <div class="preferencias__grupo" role="group" aria-labelledby="rotulo-tema">
+          <span class="preferencias__rotulo" id="rotulo-tema">Tema</span>
+          <button type="button" class="preferencias__botao" data-tema="auto" aria-pressed="true">Automático</button>
+          <button type="button" class="preferencias__botao" data-tema="claro" aria-pressed="false">Claro</button>
+          <button type="button" class="preferencias__botao" data-tema="escuro" aria-pressed="false">Escuro</button>
+          <button type="button" class="preferencias__botao" data-tema="alto-contraste" aria-pressed="false">Alto contraste</button>
+        </div>
+        <div class="preferencias__grupo" role="group" aria-labelledby="rotulo-fonte">
+          <span class="preferencias__rotulo" id="rotulo-fonte">Tamanho do texto</span>
+          <button type="button" class="preferencias__botao" data-fonte="diminuir" aria-label="Diminuir texto">A−</button>
+          <button type="button" class="preferencias__botao" data-fonte="padrao" aria-label="Tamanho padrão">A</button>
+          <button type="button" class="preferencias__botao" data-fonte="aumentar" aria-label="Aumentar texto">A+</button>
+        </div>
+      </div>
+      <p class="col-12"><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
     </div>
   </footer>
 

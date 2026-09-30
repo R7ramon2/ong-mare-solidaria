@@ -10,15 +10,15 @@ body {
   font-family: var(--fonte-texto);
   font-size: var(--texto-base);
   line-height: var(--altura-linha-texto);
-  color: var(--cor-neutra-900);
-  background: var(--cor-neutra-000);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
 }
 
 h1, h2, h3 {
   font-family: var(--fonte-titulo);
   font-weight: var(--peso-forte);
   line-height: var(--altura-linha-titulo);
-  color: var(--cor-primaria-900);
+  color: var(--cor-titulo);
 }
 
 h1 { font-size: var(--texto-h2); margin-bottom: var(--espaco-3); }
@@ -27,7 +27,7 @@ h3 { font-size: var(--texto-h3); margin-bottom: var(--espaco-2); }
 
 p { margin-bottom: var(--espaco-3); }
 
-a { color: var(--cor-primaria-700); }
+a { color: var(--cor-link); }
 
 img {
   max-width: 100%;
@@ -40,8 +40,33 @@ main.container {
 }
 
 .intro {
-  color: var(--cor-neutra-600);
+  color: var(--cor-texto-apoio);
   max-width: var(--largura-texto);
+}
+
+/* link "Pular para o conteudo" (WCAG 2.4.1): fica fora da tela e
+   aparece no topo quando recebe foco pelo Tab */
+.pular-conteudo {
+  position: absolute;
+  top: var(--espaco-2);
+  left: var(--espaco-2);
+  z-index: 200;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-acao);
+  color: var(--cor-sobre-acao);
+  font-weight: var(--peso-forte);
+  border-radius: var(--raio-pequeno);
+  transform: translateY(-200%);
+  transition: transform var(--transicao);
+}
+
+.pular-conteudo:focus {
+  transform: translateY(0);
+}
+
+/* o <main> recebe foco pelo link acima, mas nao precisa de contorno */
+main:focus {
+  outline: none;
 }
 
 /* foco visivel para quem navega pelo teclado.
@@ -61,7 +86,7 @@ main.container {
 
 /* ===== Cabecalho ===== */
 .topo {
-  background: var(--cor-primaria-700);
+  background: var(--cor-marca);
   padding: var(--espaco-3) 0;
 }
 
@@ -75,7 +100,7 @@ main.container {
   align-items: center;
   flex-shrink: 0;
   gap: var(--espaco-2);
-  color: var(--cor-neutra-000);
+  color: var(--cor-sobre-marca);
   text-decoration: none;
   font-family: var(--fonte-titulo);
   font-size: var(--texto-h3);
@@ -100,7 +125,7 @@ main.container {
 .menu a {
   transition: border-color var(--transicao), background-color var(--transicao);
   display: block;
-  color: var(--cor-neutra-000);
+  color: var(--cor-sobre-marca);
   text-decoration: none;
   font-weight: var(--peso-medio);
   padding: var(--espaco-2) 0;
@@ -109,7 +134,7 @@ main.container {
 
 .menu a:hover,
 .menu a[aria-current="page"] {
-  border-bottom-color: var(--cor-secundaria-500);
+  border-bottom-color: var(--cor-destaque);
 }
 
 /* no celular o submenu aparece aberto e recuado dentro do painel */
@@ -131,7 +156,7 @@ main.container {
   width: 44px;
   height: 44px;
   background: transparent;
-  border: 2px solid var(--cor-primaria-300);
+  border: 2px solid var(--cor-borda-sobre-marca);
   border-radius: var(--raio-pequeno);
   cursor: pointer;
 }
@@ -140,7 +165,7 @@ main.container {
   display: block;
   width: 22px;
   height: 3px;
-  background: var(--cor-neutra-000);
+  background: var(--cor-sobre-marca);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.2s ease;
 }
@@ -169,7 +194,7 @@ main.container {
   left: 0;
   right: 0;
   z-index: 10;
-  background: var(--cor-primaria-900);
+  background: var(--cor-marca-escura);
   padding: 0 var(--espaco-3);
   max-height: 0;
   overflow: hidden;
@@ -190,8 +215,8 @@ main.container {
    focus-visible usa o contorno global; disabled apaga e trava */
 .botao {
   display: inline-block;
-  background: var(--cor-secundaria-500);
-  color: var(--cor-primaria-900);
+  background: var(--cor-acao);
+  color: var(--cor-sobre-acao);
   font-family: inherit;
   font-size: var(--texto-base);
   font-weight: var(--peso-forte);
@@ -205,13 +230,13 @@ main.container {
 }
 
 .botao:hover {
-  background: var(--cor-secundaria-600);
+  background: var(--cor-acao-hover);
   box-shadow: var(--sombra-elevada);
   transform: translateY(-2px);
 }
 
 .botao:active {
-  background: var(--cor-secundaria-700);
+  background: var(--cor-acao-ativa);
   box-shadow: none;
   transform: translateY(0);
 }
@@ -225,33 +250,33 @@ main.container {
 }
 
 .botao:disabled:hover {
-  background: var(--cor-secundaria-500);
+  background: var(--cor-acao);
 }
 
 .botao-secundario {
   background: transparent;
-  color: var(--cor-neutra-600);
-  border-color: var(--cor-neutra-300);
+  color: var(--cor-texto-apoio);
+  border-color: var(--cor-borda);
 }
 
 .botao-secundario:hover {
-  background: var(--cor-primaria-100);
-  border-color: var(--cor-primaria-700);
-  color: var(--cor-primaria-900);
+  background: var(--cor-fundo-suave);
+  border-color: var(--cor-link);
+  color: var(--cor-titulo);
   box-shadow: none;
   transform: none;
 }
 
 .botao-secundario:active {
-  background: var(--cor-primaria-300);
+  background: var(--cor-fundo-ativo);
 }
 
 
 /* ===== Index ===== */
 .banner {
-  background: var(--cor-primaria-100);
+  background: var(--cor-fundo-suave);
   padding: var(--espaco-6) 0;
-  border-bottom: 6px solid var(--cor-secundaria-500);
+  border-bottom: 6px solid var(--cor-destaque);
 }
 
 .banner h1 {
@@ -266,6 +291,7 @@ main.container {
 }
 
 .sobre,
+.impacto,
 .como-ajudar {
   padding-top: var(--espaco-6);
   padding-bottom: var(--espaco-3);
@@ -286,7 +312,7 @@ main.container {
 }
 
 .foto-sobre figcaption {
-  color: var(--cor-neutra-600);
+  color: var(--cor-texto-apoio);
   font-size: var(--texto-pequeno);
   margin-top: var(--espaco-2);
 }
@@ -297,16 +323,16 @@ main.container {
 
 .numeros p {
   margin: 0;
-  border-left: 4px solid var(--cor-secundaria-500);
+  border-left: 4px solid var(--cor-destaque);
   padding-left: var(--espaco-3);
-  color: var(--cor-neutra-600);
+  color: var(--cor-texto-apoio);
 }
 
 .numeros strong {
   display: block;
   font-family: var(--fonte-titulo);
   font-size: var(--texto-h1);
-  color: var(--cor-primaria-700);
+  color: var(--cor-link);
 }
 
 .como-ajudar .grid {
@@ -326,17 +352,17 @@ main.container {
   transition: background-color var(--transicao);
   font-weight: var(--peso-forte);
   padding: var(--espaco-2) var(--espaco-3);
-  border: 2px solid var(--cor-primaria-700);
+  border: 2px solid var(--cor-link);
   border-radius: var(--raio-pequeno);
   text-decoration: none;
 }
 
 .atalhos a:hover {
-  background: var(--cor-primaria-100);
+  background: var(--cor-fundo-suave);
 }
 
 .atalhos a:active {
-  background: var(--cor-primaria-300);
+  background: var(--cor-fundo-ativo);
 }
 
 .bloco {
@@ -344,7 +370,7 @@ main.container {
 }
 
 .bloco > h2 {
-  border-bottom: 4px solid var(--cor-secundaria-500);
+  border-bottom: 4px solid var(--cor-destaque);
   display: inline-block;
   padding-bottom: var(--espaco-1);
 }
@@ -359,16 +385,16 @@ main.container {
   display: flex;
   flex-direction: column;
   padding: var(--espaco-4);
-  border: 1px solid var(--cor-neutra-300);
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-medio);
-  background: var(--cor-neutra-000);
+  background: var(--cor-fundo);
   transition: border-color var(--transicao), box-shadow var(--transicao);
 }
 
 /* o card inteiro reage quando o mouse ou o foco estao nele */
 .projeto:hover,
 .projeto:focus-within {
-  border-color: var(--cor-primaria-300);
+  border-color: var(--cor-borda-destaque);
   box-shadow: var(--sombra-elevada);
 }
 
@@ -393,7 +419,7 @@ main.container {
 }
 
 .projeto .detalhe {
-  color: var(--cor-neutra-600);
+  color: var(--cor-texto-apoio);
   font-weight: var(--peso-medio);
 }
 
@@ -402,7 +428,7 @@ main.container {
 }
 
 .dados-doacao {
-  background: var(--cor-primaria-100);
+  background: var(--cor-fundo-suave);
   padding: var(--espaco-3) var(--espaco-4);
   border-radius: var(--raio-pequeno);
 }
@@ -417,15 +443,15 @@ main.container {
 
 .chamada {
   margin-top: var(--espaco-6);
-  background: var(--cor-primaria-700);
-  color: var(--cor-neutra-000);
+  background: var(--cor-marca);
+  color: var(--cor-sobre-marca);
   padding: var(--espaco-5);
   border-radius: var(--raio-medio);
   box-shadow: 0 4px 12px var(--cor-sombra);
 }
 
 .chamada h2 {
-  color: var(--cor-neutra-000);
+  color: var(--cor-sobre-marca);
 }
 
 .chamada p {
@@ -440,7 +466,7 @@ main.container {
 }
 
 fieldset {
-  border: 1px solid var(--cor-neutra-300);
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-medio);
   padding: var(--espaco-3) var(--espaco-3) var(--espaco-1);
   margin-bottom: var(--espaco-5);
@@ -450,12 +476,12 @@ legend {
   font-family: var(--fonte-titulo);
   font-weight: var(--peso-forte);
   font-size: var(--texto-h3);
-  color: var(--cor-primaria-900);
+  color: var(--cor-titulo);
   padding: 0 var(--espaco-2);
 }
 
 .grid-form {
-  column-gap: var(--espaco-3);
+  column-gap: clamp(var(--espaco-1), 2vw, var(--espaco-3));
   row-gap: 0;
 }
 
@@ -480,10 +506,10 @@ textarea {
   font-family: inherit;
   font-size: var(--texto-base);
   padding: var(--espaco-2) var(--espaco-3);
-  border: 1px solid var(--cor-neutra-300);
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-pequeno);
-  background: var(--cor-neutra-000);
-  color: var(--cor-neutra-900);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
   transition: border-color var(--transicao), box-shadow var(--transicao),
               background-color var(--transicao);
 }
@@ -495,70 +521,75 @@ textarea {
 input:hover,
 select:hover,
 textarea:hover {
-  border-color: var(--cor-neutra-600);
+  border-color: var(--cor-borda-forte);
 }
 
 /* campo em edicao: borda verde e um "halo" em volta */
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--cor-primaria-700);
-  box-shadow: 0 0 0 3px var(--cor-primaria-100);
+  border-color: var(--cor-link);
+  box-shadow: 0 0 0 3px var(--cor-fundo-suave);
   outline: none;
 }
 
 /* Feedback de validacao.
-   :user-valid e :user-invalid so entram depois que a pessoa
-   interage com o campo, entao ninguem ve erro antes de digitar.
-   Alem da cor, os campos de texto ganham um icone (certo ou !),
-   para a informacao nao depender so da cor. */
-input[required]:user-valid,
-select[required]:user-valid {
+   As classes .campo--erro e .campo--sucesso sao colocadas pelo
+   JS (js/modules/formulario.js) na div .campo de cada campo.
+   Alem da cor, os campos de texto ganham um icone e o erro vem
+   com uma mensagem em texto, para nao depender so da cor. */
+.campo--sucesso input,
+.campo--sucesso select {
   border-color: var(--cor-sucesso);
 }
 
-input:user-invalid,
-select:user-invalid,
-textarea:user-invalid {
+.campo--erro input:not([type="radio"]):not([type="checkbox"]),
+.campo--erro select,
+.campo--erro textarea {
   border-color: var(--cor-erro);
   background-color: var(--cor-erro-fundo);
 }
 
-input:user-invalid:focus {
+.campo--erro input:focus,
+.campo--erro select:focus {
   box-shadow: 0 0 0 3px var(--cor-erro-fundo);
 }
 
-input[type="text"][required]:user-valid,
-input[type="email"]:user-valid,
-input[type="tel"]:user-valid {
+.campo--sucesso input[type="text"],
+.campo--sucesso input[type="email"],
+.campo--sucesso input[type="tel"],
+.campo--erro input[type="text"],
+.campo--erro input[type="email"],
+.campo--erro input[type="tel"] {
   padding-right: 2.5rem;
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.1rem;
+}
+
+.campo--sucesso input[type="text"],
+.campo--sucesso input[type="email"],
+.campo--sucesso input[type="tel"] {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%232f5d50' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1.1rem;
 }
 
-input[type="text"]:user-invalid,
-input[type="email"]:user-invalid,
-input[type="tel"]:user-invalid {
-  padding-right: 2.5rem;
+.campo--erro input[type="text"],
+.campo--erro input[type="email"],
+.campo--erro input[type="tel"] {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23b3261e'/%3E%3Cpath d='M12 6.5v7' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='17.3' r='1.4' fill='%23fff'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1.1rem;
 }
 
-/* mensagem de erro em texto, escondida ate o campo ficar invalido */
+.campo--erro .rotulo,
+.campo--erro .opcoes label {
+  color: var(--cor-erro);
+}
+
+/* mensagem injetada pelo JS logo abaixo do campo com erro */
 .msg-erro {
-  display: none;
   color: var(--cor-erro);
   font-size: var(--texto-pequeno);
   font-weight: var(--peso-medio);
-  margin-top: var(--espaco-1);
-}
-
-.campo:has(:user-invalid) .msg-erro {
-  display: block;
+  margin: var(--espaco-1) 0 0;
 }
 
 .obrigatorio {
@@ -567,7 +598,7 @@ input[type="tel"]:user-invalid {
 
 .dica {
   display: block;
-  color: var(--cor-neutra-600);
+  color: var(--cor-texto-apoio);
   font-size: var(--texto-pequeno);
   margin-top: var(--espaco-1);
 }
@@ -591,7 +622,7 @@ input[type="tel"]:user-invalid {
 .termos input {
   width: 1.1rem;
   height: 1.1rem;
-  accent-color: var(--cor-primaria-700);
+  accent-color: var(--cor-link);
 }
 
 .termos {
@@ -621,8 +652,8 @@ input[type="tel"]:user-invalid {
 
 /* ===== Rodape ===== */
 .rodape {
-  background: var(--cor-primaria-900);
-  color: var(--cor-primaria-100);
+  background: var(--cor-marca-escura);
+  color: var(--cor-sobre-marca-suave);
   padding: var(--espaco-5) 0;
 }
 
@@ -636,7 +667,7 @@ input[type="tel"]:user-invalid {
 }
 
 .rodape a {
-  color: var(--cor-secundaria-500);
+  color: var(--cor-destaque);
 }
 
 .rodape p {
@@ -699,7 +730,7 @@ input[type="tel"]:user-invalid {
     z-index: 20;
     min-width: 14rem;
     padding: var(--espaco-2) 0;
-    background: var(--cor-neutra-000);
+    background: var(--cor-fundo);
     border-radius: var(--raio-medio);
     box-shadow: 0 8px 16px var(--cor-sombra);
     opacity: 0;
@@ -717,19 +748,21 @@ input[type="tel"]:user-invalid {
   }
 
   .submenu a {
-    color: var(--cor-primaria-900);
+    color: var(--cor-titulo);
     padding: var(--espaco-2) var(--espaco-3);
     border-bottom: 0;
   }
 
   .submenu a:hover,
   .submenu a:focus-visible {
-    background: var(--cor-primaria-100);
+    background: var(--cor-fundo-suave);
   }
 
   .banner { padding: var(--espaco-7) 0; }
 
-  .rodape-conteudo p { text-align: right; }
+  .preferencias { align-items: flex-end; }
+  .preferencias__grupo { justify-content: flex-end; }
+  .preferencias__rotulo { flex-basis: auto; margin-right: var(--espaco-1); }
 }
 
 /* lg: notebook pequeno - texto e imagem lado a lado no index */
@@ -781,4 +814,141 @@ main.carregando {
    so para o leitor de tela; nao precisa de contorno */
 main [tabindex="-1"]:focus {
   outline: none;
+}
+
+
+/* ===== Preferencias: tema e tamanho do texto (rodape) ===== */
+.preferencias {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+}
+
+.preferencias__grupo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+/* no celular o rótulo fica numa linha e os botões na de baixo */
+.preferencias__rotulo {
+  flex-basis: 100%;
+  font-size: var(--texto-pequeno);
+}
+
+.preferencias__botao {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0 var(--espaco-2);
+  background: transparent;
+  color: var(--cor-sobre-marca);
+  border: 1px solid var(--cor-borda-sobre-marca);
+  border-radius: var(--raio-pequeno);
+  font-weight: var(--peso-forte);
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+.preferencias__botao:hover,
+.preferencias__botao[aria-pressed="true"] {
+  background: var(--cor-acao);
+  border-color: var(--cor-acao);
+  color: var(--cor-sobre-acao);
+}
+
+.preferencias__botao:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+  color: var(--cor-sobre-marca);
+}
+
+/* ===== Historico de cadastros (localStorage) ===== */
+.historico {
+  max-width: 760px;
+  margin-top: var(--espaco-6);
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-borda);
+}
+
+.historico__lista {
+  list-style: none;
+  margin-bottom: var(--espaco-3);
+}
+
+.historico__item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espaco-1) var(--espaco-3);
+  padding: var(--espaco-2) 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.historico__data {
+  color: var(--cor-texto-apoio);
+  font-size: var(--texto-pequeno);
+}
+
+.alerta__acoes {
+  margin-top: var(--espaco-2);
+}
+
+.botao-pequeno {
+  padding: var(--espaco-1) var(--espaco-3);
+  font-size: var(--texto-pequeno);
+}
+
+
+/* ===== Grafico de impacto (Chart.js) ===== */
+.grafico {
+  margin: var(--espaco-4) 0 var(--espaco-3);
+}
+
+/* o Chart.js precisa de um pai com position: relative e altura
+   definida para redimensionar o canvas junto com a tela */
+.grafico__area {
+  position: relative;
+  height: 280px;
+}
+
+.grafico figcaption {
+  color: var(--cor-texto-apoio);
+  font-size: var(--texto-pequeno);
+  margin-top: var(--espaco-2);
+}
+
+.grafico__dados summary {
+  cursor: pointer;
+  font-weight: var(--peso-medio);
+  color: var(--cor-link);
+}
+
+.tabela {
+  width: 100%;
+  max-width: 420px;
+  margin-top: var(--espaco-3);
+  border-collapse: collapse;
+}
+
+.tabela caption {
+  text-align: left;
+  font-weight: var(--peso-forte);
+  margin-bottom: var(--espaco-2);
+}
+
+.tabela th,
+.tabela td {
+  padding: var(--espaco-2) var(--espaco-3);
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
+}
+
+.tabela td {
+  text-align: right;
+}
+
+@media (min-width: 992px) {
+  .grafico__area { height: 340px; }
 }

@@ -1,0 +1,237 @@
+/* =========================================================
+   Temas - modo escuro e alto contraste
+   Os temas só redefinem os tokens semânticos do variaveis.css.
+   Todas as combinações de texto e fundo foram conferidas:
+   escuro >= 6:1 (acima do AA, 4.5:1) e alto contraste >= 9:1
+   (acima do AAA, 7:1).
+
+   Como o tema é escolhido:
+   1. Escolha salva pela pessoa (botões do rodapé): o JS coloca
+      data-tema="claro|escuro|alto-contraste" no <html>.
+   2. Sem escolha ("Automático"): o <html> fica sem data-tema e
+      valem as preferências do sistema operacional
+      (prefers-contrast: more e prefers-color-scheme: dark).
+      Isso funciona até sem JavaScript.
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+}
+
+/* ---------- Modo escuro ---------- */
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+  --cor-fundo: #121c19;
+  --cor-fundo-suave: #1b2a25;
+  --cor-fundo-ativo: #27403a;
+  --cor-texto: #e3ebe7;
+  --cor-texto-apoio: #a7b6b0;
+  --cor-titulo: #f0f5f2;
+  --cor-link: #8cd3b4;
+  --cor-borda: #3b504a;
+  --cor-borda-forte: #8a9c95;
+  --cor-borda-destaque: #4f7a6a;
+  --cor-marca: #1c3a31;
+  --cor-marca-escura: #0b1311;
+  --cor-sobre-marca: #ffffff;
+  --cor-sobre-marca-suave: #c9d8d1;
+  --cor-borda-sobre-marca: #8cd3b4;
+  --cor-acao: #f2b632;
+  --cor-acao-hover: #f5c65c;
+  --cor-acao-ativa: #e0a41f;
+  --cor-sobre-acao: #1f4037;
+  --cor-destaque: #f2b632;
+  --cor-foco: #f2b632;
+  --cor-foco-sobre-marca: #f2b632;
+  --cor-backdrop: rgba(0, 0, 0, 0.7);
+  --cor-sombra: rgba(0, 0, 0, 0.5);
+  --cor-erro: #ff9b91;
+  --cor-erro-fundo: #3b1a17;
+  --cor-sucesso: #8cd3b4;
+  --cor-sucesso-fundo: #1b2a25;
+  --cor-aviso: #f5d27e;
+  --cor-aviso-fundo: #3a2f12;
+  --cor-info: #a7b6b0;
+  --cor-info-fundo: #1d2825;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) {
+    color-scheme: dark;
+    --cor-fundo: #121c19;
+    --cor-fundo-suave: #1b2a25;
+    --cor-fundo-ativo: #27403a;
+    --cor-texto: #e3ebe7;
+    --cor-texto-apoio: #a7b6b0;
+    --cor-titulo: #f0f5f2;
+    --cor-link: #8cd3b4;
+    --cor-borda: #3b504a;
+    --cor-borda-forte: #8a9c95;
+    --cor-borda-destaque: #4f7a6a;
+    --cor-marca: #1c3a31;
+    --cor-marca-escura: #0b1311;
+    --cor-sobre-marca: #ffffff;
+    --cor-sobre-marca-suave: #c9d8d1;
+    --cor-borda-sobre-marca: #8cd3b4;
+    --cor-acao: #f2b632;
+    --cor-acao-hover: #f5c65c;
+    --cor-acao-ativa: #e0a41f;
+    --cor-sobre-acao: #1f4037;
+    --cor-destaque: #f2b632;
+    --cor-foco: #f2b632;
+    --cor-foco-sobre-marca: #f2b632;
+    --cor-backdrop: rgba(0, 0, 0, 0.7);
+    --cor-sombra: rgba(0, 0, 0, 0.5);
+    --cor-erro: #ff9b91;
+    --cor-erro-fundo: #3b1a17;
+    --cor-sucesso: #8cd3b4;
+    --cor-sucesso-fundo: #1b2a25;
+    --cor-aviso: #f5d27e;
+    --cor-aviso-fundo: #3a2f12;
+    --cor-info: #a7b6b0;
+    --cor-info-fundo: #1d2825;
+  }
+}
+
+/* ---------- Alto contraste ----------
+   Preto, branco e amarelo, sem cinzas nem sombras */
+:root[data-tema="alto-contraste"] {
+  color-scheme: dark;
+  --cor-fundo: #000000;
+  --cor-fundo-suave: #1a1a1a;
+  --cor-fundo-ativo: #333333;
+  --cor-texto: #ffffff;
+  --cor-texto-apoio: #ffffff;
+  --cor-titulo: #ffffff;
+  --cor-link: #ffee58;
+  --cor-borda: #ffffff;
+  --cor-borda-forte: #ffffff;
+  --cor-borda-destaque: #ffee58;
+  --cor-marca: #000000;
+  --cor-marca-escura: #000000;
+  --cor-sobre-marca: #ffffff;
+  --cor-sobre-marca-suave: #ffffff;
+  --cor-borda-sobre-marca: #ffffff;
+  --cor-acao: #ffee58;
+  --cor-acao-hover: #ffffff;
+  --cor-acao-ativa: #ffee58;
+  --cor-sobre-acao: #000000;
+  --cor-destaque: #ffee58;
+  --cor-foco: #00e5ff;
+  --cor-foco-sobre-marca: #00e5ff;
+  --cor-backdrop: rgba(0, 0, 0, 0.85);
+  --cor-sombra: transparent;
+  --cor-erro: #ff8a80;
+  --cor-erro-fundo: #000000;
+  --cor-sucesso: #7dffb3;
+  --cor-sucesso-fundo: #000000;
+  --cor-aviso: #ffee58;
+  --cor-aviso-fundo: #000000;
+  --cor-info: #ffffff;
+  --cor-info-fundo: #000000;
+}
+
+@media (prefers-contrast: more) {
+  :root:not([data-tema]) {
+    color-scheme: dark;
+    --cor-fundo: #000000;
+    --cor-fundo-suave: #1a1a1a;
+    --cor-fundo-ativo: #333333;
+    --cor-texto: #ffffff;
+    --cor-texto-apoio: #ffffff;
+    --cor-titulo: #ffffff;
+    --cor-link: #ffee58;
+    --cor-borda: #ffffff;
+    --cor-borda-forte: #ffffff;
+    --cor-borda-destaque: #ffee58;
+    --cor-marca: #000000;
+    --cor-marca-escura: #000000;
+    --cor-sobre-marca: #ffffff;
+    --cor-sobre-marca-suave: #ffffff;
+    --cor-borda-sobre-marca: #ffffff;
+    --cor-acao: #ffee58;
+    --cor-acao-hover: #ffffff;
+    --cor-acao-ativa: #ffee58;
+    --cor-sobre-acao: #000000;
+    --cor-destaque: #ffee58;
+    --cor-foco: #00e5ff;
+    --cor-foco-sobre-marca: #00e5ff;
+    --cor-backdrop: rgba(0, 0, 0, 0.85);
+    --cor-sombra: transparent;
+    --cor-erro: #ff8a80;
+    --cor-erro-fundo: #000000;
+    --cor-sucesso: #7dffb3;
+    --cor-sucesso-fundo: #000000;
+    --cor-aviso: #ffee58;
+    --cor-aviso-fundo: #000000;
+    --cor-info: #ffffff;
+    --cor-info-fundo: #000000;
+  }
+}
+
+/* ---------- Ajustes que não são só cor ---------- */
+
+/* ícone de "certo" dos campos válidos: o verde escuro some no fundo escuro */
+:root[data-tema="escuro"] .campo--sucesso input[type="text"],
+:root[data-tema="escuro"] .campo--sucesso input[type="email"],
+:root[data-tema="escuro"] .campo--sucesso input[type="tel"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%238cd3b4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) .campo--sucesso input[type="text"],
+  :root:not([data-tema]) .campo--sucesso input[type="email"],
+  :root:not([data-tema]) .campo--sucesso input[type="tel"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%238cd3b4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+
+/* No alto contraste, a informação não pode depender de sombra ou de
+   fundo levemente diferente: links sempre sublinhados, bordas visíveis
+   em botões e cards e contorno de foco mais grosso. */
+:root[data-tema="alto-contraste"] a:not(.botao):not(.marca) {
+  text-decoration: underline;
+}
+
+:root[data-tema="alto-contraste"] .botao,
+:root[data-tema="alto-contraste"] .projeto,
+:root[data-tema="alto-contraste"] .chamada,
+:root[data-tema="alto-contraste"] .toast,
+:root[data-tema="alto-contraste"] .submenu,
+:root[data-tema="alto-contraste"] .modal,
+:root[data-tema="alto-contraste"] .topo,
+:root[data-tema="alto-contraste"] .rodape {
+  border: 2px solid var(--cor-borda);
+}
+
+:root[data-tema="alto-contraste"] :focus-visible {
+  outline-width: 4px;
+}
+
+:root[data-tema="alto-contraste"] .campo--sucesso input[type="text"],
+:root[data-tema="alto-contraste"] .campo--sucesso input[type="email"],
+:root[data-tema="alto-contraste"] .campo--sucesso input[type="tel"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%237dffb3' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Modo de alto contraste do Windows (forced-colors): o sistema troca
+   todas as cores. Garante bordas onde antes só havia cor de fundo. */
+@media (forced-colors: active) {
+  .botao,
+  .atalhos a,
+  .preferencias__botao,
+  .badge,
+  .toast,
+  .alerta {
+    border: 2px solid ButtonText;
+  }
+
+  .preferencias__botao[aria-pressed="true"] {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .pular-conteudo {
+    border: 2px solid ButtonText;
+  }
+}

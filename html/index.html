@@ -5,17 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ONG Maré Solidária - ações comunitárias em Recife e Região Metropolitana">
   <title>Maré Solidária | Início</title>
+  <!-- aplica o tema e o tamanho de texto salvos antes de desenhar a página,
+       para não piscar o tema claro em quem escolheu o escuro -->
+  <script>
+    try {
+      var pref = JSON.parse(localStorage.getItem('mare:preferencias'));
+      if (pref && pref.tema && pref.tema !== 'auto') document.documentElement.dataset.tema = pref.tema;
+      if (pref && pref.escalaFonte) document.documentElement.style.fontSize = pref.escalaFonte + '%';
+    } catch (e) {}
+  </script>
   <link rel="icon" href="../imagens/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/variaveis.css">
   <link rel="stylesheet" href="../css/grid.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/temas.css">
 </head>
 <body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
 
   <header class="topo">
     <div class="container grid topo-conteudo">
@@ -46,7 +58,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
     <section class="banner">
       <div class="container">
         <h1>Gente ajudando gente, nos bairros onde a gente mora.</h1>
@@ -76,6 +88,42 @@
       </div>
     </section>
 
+    <section class="container impacto" aria-labelledby="impacto-titulo">
+      <h2 id="impacto-titulo">Refeições servidas em 2025</h2>
+      <p class="intro">A Cozinha da Comunidade cresceu mês a mês com a chegada de novos voluntários e doadores.</p>
+
+      <figure class="grafico">
+        <div class="grafico__area">
+          <canvas id="grafico-refeicoes" role="img" aria-label="Gráfico de barras com as refeições servidas por mês em 2025, crescendo de 1.180 em janeiro para 1.520 em dezembro. Os valores estão na tabela logo abaixo."></canvas>
+        </div>
+        <figcaption>Fonte: controle interno da Cozinha da Comunidade.</figcaption>
+      </figure>
+
+      <details class="grafico__dados" id="dados-refeicoes">
+        <summary>Ver os dados em tabela</summary>
+        <table class="tabela" id="tabela-refeicoes">
+          <caption>Refeições servidas por mês em 2025</caption>
+          <thead>
+            <tr><th scope="col">Mês</th><th scope="col">Refeições</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row" data-curto="Jan">Janeiro</th><td>1.180</td></tr>
+            <tr><th scope="row" data-curto="Fev">Fevereiro</th><td>1.210</td></tr>
+            <tr><th scope="row" data-curto="Mar">Março</th><td>1.260</td></tr>
+            <tr><th scope="row" data-curto="Abr">Abril</th><td>1.300</td></tr>
+            <tr><th scope="row" data-curto="Mai">Maio</th><td>1.330</td></tr>
+            <tr><th scope="row" data-curto="Jun">Junho</th><td>1.370</td></tr>
+            <tr><th scope="row" data-curto="Jul">Julho</th><td>1.410</td></tr>
+            <tr><th scope="row" data-curto="Ago">Agosto</th><td>1.390</td></tr>
+            <tr><th scope="row" data-curto="Set">Setembro</th><td>1.430</td></tr>
+            <tr><th scope="row" data-curto="Out">Outubro</th><td>1.460</td></tr>
+            <tr><th scope="row" data-curto="Nov">Novembro</th><td>1.480</td></tr>
+            <tr><th scope="row" data-curto="Dez">Dezembro</th><td>1.520</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
     <section class="container como-ajudar">
       <h2>Como você pode ajudar</h2>
       <div class="grid">
@@ -97,13 +145,28 @@
 
   <footer class="rodape">
     <div class="container grid rodape-conteudo">
-      <address class="col-12 col-md-8">
+      <address class="col-12 col-md-6">
         <strong>Maré Solidária</strong><br>
         Rua Exemplo, 123 - Ibura, Recife - PE<br>
         <a href="mailto:contato@maresolidaria.org">contato@maresolidaria.org</a><br>
         <a href="tel:+5581999990000">(81) 99999-0000</a>
       </address>
-      <p class="col-12 col-md-4"><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
+      <div class="preferencias col-12 col-md-6">
+        <div class="preferencias__grupo" role="group" aria-labelledby="rotulo-tema">
+          <span class="preferencias__rotulo" id="rotulo-tema">Tema</span>
+          <button type="button" class="preferencias__botao" data-tema="auto" aria-pressed="true">Automático</button>
+          <button type="button" class="preferencias__botao" data-tema="claro" aria-pressed="false">Claro</button>
+          <button type="button" class="preferencias__botao" data-tema="escuro" aria-pressed="false">Escuro</button>
+          <button type="button" class="preferencias__botao" data-tema="alto-contraste" aria-pressed="false">Alto contraste</button>
+        </div>
+        <div class="preferencias__grupo" role="group" aria-labelledby="rotulo-fonte">
+          <span class="preferencias__rotulo" id="rotulo-fonte">Tamanho do texto</span>
+          <button type="button" class="preferencias__botao" data-fonte="diminuir" aria-label="Diminuir texto">A−</button>
+          <button type="button" class="preferencias__botao" data-fonte="padrao" aria-label="Tamanho padrão">A</button>
+          <button type="button" class="preferencias__botao" data-fonte="aumentar" aria-label="Aumentar texto">A+</button>
+        </div>
+      </div>
+      <p class="col-12"><small>&copy; 2026 Maré Solidária. Projeto acadêmico.</small></p>
     </div>
   </footer>
 
